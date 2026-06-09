@@ -18,23 +18,19 @@ async function generateCode() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                url: input
+                url: input,
+                type: "free"
             })
         });
 
         const data = await response.json();
 
         if (data.success) {
-            result.innerHTML = `
-                <div style="font-size: 32px; font-weight: bold;">
-                    ${data.code}
-                </div>
-            `;
+            result.innerHTML = `<div style="font-size:32px;font-weight:bold;">${data.code}</div>`;
         } else {
             result.textContent = data.error || "Neznámá chyba.";
         }
     } catch (error) {
-        console.error(error);
         result.textContent = "Network Error: " + error.message;
     }
 }
